@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bibiboy.mapper.basic.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.bibiboy.bean.basic.SysUser" >
+    <id column="n_Id" property="nId" jdbcType="INTEGER" />
+    <result column="n_Status" property="nStatus" jdbcType="INTEGER" />
+    <result column="n_Type" property="nType" jdbcType="INTEGER" />
+    <result column="vc_User_Name" property="vcUserName" jdbcType="VARCHAR" />
+    <result column="vc_Pass_Word" property="vcPassWord" jdbcType="VARCHAR" />
+    <result column="vc_Name" property="vcName" jdbcType="VARCHAR" />
+    <result column="vc_Tel" property="vcTel" jdbcType="VARCHAR" />
+    <result column="vc_Email" property="vcEmail" jdbcType="VARCHAR" />
+    <result column="n_Manager_Flag" property="nManagerFlag" jdbcType="INTEGER" />
+    <result column="n_Seller_Flag" property="nSellerFlag" jdbcType="INTEGER" />
+    <result column="n_Repair_Flag" property="nRepairFlag" jdbcType="INTEGER" />
+    <result column="dt_Reg" property="dtReg" jdbcType="TIMESTAMP" />
+    <result column="dt_Update" property="dtUpdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bibiboy.bean.basic.SysUser" extends="BaseResultMap" >
+    <result column="vc_Memo" property="vcMemo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    n_Id, n_Status, n_Type, vc_User_Name, vc_Pass_Word, vc_Name, vc_Tel, vc_Email, n_Manager_Flag, 
+    n_Seller_Flag, n_Repair_Flag, dt_Reg, dt_Update
+  </sql>
+  <sql id="Blob_Column_List" >
+    vc_Memo
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bibiboy.bean.basic.SysUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bibiboy.bean.basic.SysUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_user
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_user
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bibiboy.bean.basic.SysUserExample" >
+    delete from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bibiboy.bean.basic.SysUser" >
+    insert into sys_user (n_Id, n_Status, n_Type, 
+      vc_User_Name, vc_Pass_Word, vc_Name, 
+      vc_Tel, vc_Email, n_Manager_Flag, 
+      n_Seller_Flag, n_Repair_Flag, dt_Reg, 
+      dt_Update, vc_Memo)
+    values (#{nId,jdbcType=INTEGER}, #{nStatus,jdbcType=INTEGER}, #{nType,jdbcType=INTEGER}, 
+      #{vcUserName,jdbcType=VARCHAR}, #{vcPassWord,jdbcType=VARCHAR}, #{vcName,jdbcType=VARCHAR}, 
+      #{vcTel,jdbcType=VARCHAR}, #{vcEmail,jdbcType=VARCHAR}, #{nManagerFlag,jdbcType=INTEGER}, 
+      #{nSellerFlag,jdbcType=INTEGER}, #{nRepairFlag,jdbcType=INTEGER}, #{dtReg,jdbcType=TIMESTAMP}, 
+      #{dtUpdate,jdbcType=TIMESTAMP}, #{vcMemo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bibiboy.bean.basic.SysUser" >
+  	 <selectKey resultType="Integer" order="AFTER" keyProperty="user.userId">
+            SELECT LAST_INSERT_ID() AS nId
+     </selectKey>
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        n_Id,
+      </if>
+      <if test="nStatus != null" >
+        n_Status,
+      </if>
+      <if test="nType != null" >
+        n_Type,
+      </if>
+      <if test="vcUserName != null" >
+        vc_User_Name,
+      </if>
+      <if test="vcPassWord != null" >
+        vc_Pass_Word,
+      </if>
+      <if test="vcName != null" >
+        vc_Name,
+      </if>
+      <if test="vcTel != null" >
+        vc_Tel,
+      </if>
+      <if test="vcEmail != null" >
+        vc_Email,
+      </if>
+      <if test="nManagerFlag != null" >
+        n_Manager_Flag,
+      </if>
+      <if test="nSellerFlag != null" >
+        n_Seller_Flag,
+      </if>
+      <if test="nRepairFlag != null" >
+        n_Repair_Flag,
+      </if>
+      <if test="dtReg != null" >
+        dt_Reg,
+      </if>
+      <if test="dtUpdate != null" >
+        dt_Update,
+      </if>
+      <if test="vcMemo != null" >
+        vc_Memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        #{nId,jdbcType=INTEGER},
+      </if>
+      <if test="nStatus != null" >
+        #{nStatus,jdbcType=INTEGER},
+      </if>
+      <if test="nType != null" >
+        #{nType,jdbcType=INTEGER},
+      </if>
+      <if test="vcUserName != null" >
+        #{vcUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcPassWord != null" >
+        #{vcPassWord,jdbcType=VARCHAR},
+      </if>
+      <if test="vcName != null" >
+        #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcTel != null" >
+        #{vcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="vcEmail != null" >
+        #{vcEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="nManagerFlag != null" >
+        #{nManagerFlag,jdbcType=INTEGER},
+      </if>
+      <if test="nSellerFlag != null" >
+        #{nSellerFlag,jdbcType=INTEGER},
+      </if>
+      <if test="nRepairFlag != null" >
+        #{nRepairFlag,jdbcType=INTEGER},
+      </if>
+      <if test="dtReg != null" >
+        #{dtReg,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dtUpdate != null" >
+        #{dtUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcMemo != null" >
+        #{vcMemo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bibiboy.bean.basic.SysUserExample" resultType="java.lang.Integer" >
+    select count(*) from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_user
+    <set >
+      <if test="record.nId != null" >
+        n_Id = #{record.nId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nStatus != null" >
+        n_Status = #{record.nStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.nType != null" >
+        n_Type = #{record.nType,jdbcType=INTEGER},
+      </if>
+      <if test="record.vcUserName != null" >
+        vc_User_Name = #{record.vcUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcPassWord != null" >
+        vc_Pass_Word = #{record.vcPassWord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcName != null" >
+        vc_Name = #{record.vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcTel != null" >
+        vc_Tel = #{record.vcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcEmail != null" >
+        vc_Email = #{record.vcEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nManagerFlag != null" >
+        n_Manager_Flag = #{record.nManagerFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.nSellerFlag != null" >
+        n_Seller_Flag = #{record.nSellerFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.nRepairFlag != null" >
+        n_Repair_Flag = #{record.nRepairFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.dtReg != null" >
+        dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dtUpdate != null" >
+        dt_Update = #{record.dtUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcMemo != null" >
+        vc_Memo = #{record.vcMemo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sys_user
+    set n_Id = #{record.nId,jdbcType=INTEGER},
+      n_Status = #{record.nStatus,jdbcType=INTEGER},
+      n_Type = #{record.nType,jdbcType=INTEGER},
+      vc_User_Name = #{record.vcUserName,jdbcType=VARCHAR},
+      vc_Pass_Word = #{record.vcPassWord,jdbcType=VARCHAR},
+      vc_Name = #{record.vcName,jdbcType=VARCHAR},
+      vc_Tel = #{record.vcTel,jdbcType=VARCHAR},
+      vc_Email = #{record.vcEmail,jdbcType=VARCHAR},
+      n_Manager_Flag = #{record.nManagerFlag,jdbcType=INTEGER},
+      n_Seller_Flag = #{record.nSellerFlag,jdbcType=INTEGER},
+      n_Repair_Flag = #{record.nRepairFlag,jdbcType=INTEGER},
+      dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP},
+      dt_Update = #{record.dtUpdate,jdbcType=TIMESTAMP},
+      vc_Memo = #{record.vcMemo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_user
+    set n_Id = #{record.nId,jdbcType=INTEGER},
+      n_Status = #{record.nStatus,jdbcType=INTEGER},
+      n_Type = #{record.nType,jdbcType=INTEGER},
+      vc_User_Name = #{record.vcUserName,jdbcType=VARCHAR},
+      vc_Pass_Word = #{record.vcPassWord,jdbcType=VARCHAR},
+      vc_Name = #{record.vcName,jdbcType=VARCHAR},
+      vc_Tel = #{record.vcTel,jdbcType=VARCHAR},
+      vc_Email = #{record.vcEmail,jdbcType=VARCHAR},
+      n_Manager_Flag = #{record.nManagerFlag,jdbcType=INTEGER},
+      n_Seller_Flag = #{record.nSellerFlag,jdbcType=INTEGER},
+      n_Repair_Flag = #{record.nRepairFlag,jdbcType=INTEGER},
+      dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP},
+      dt_Update = #{record.dtUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bibiboy.bean.basic.SysUser" >
+    update sys_user
+    <set >
+      <if test="nStatus != null" >
+        n_Status = #{nStatus,jdbcType=INTEGER},
+      </if>
+      <if test="nType != null" >
+        n_Type = #{nType,jdbcType=INTEGER},
+      </if>
+      <if test="vcUserName != null" >
+        vc_User_Name = #{vcUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcPassWord != null" >
+        vc_Pass_Word = #{vcPassWord,jdbcType=VARCHAR},
+      </if>
+      <if test="vcName != null" >
+        vc_Name = #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcTel != null" >
+        vc_Tel = #{vcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="vcEmail != null" >
+        vc_Email = #{vcEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="nManagerFlag != null" >
+        n_Manager_Flag = #{nManagerFlag,jdbcType=INTEGER},
+      </if>
+      <if test="nSellerFlag != null" >
+        n_Seller_Flag = #{nSellerFlag,jdbcType=INTEGER},
+      </if>
+      <if test="nRepairFlag != null" >
+        n_Repair_Flag = #{nRepairFlag,jdbcType=INTEGER},
+      </if>
+      <if test="dtReg != null" >
+        dt_Reg = #{dtReg,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dtUpdate != null" >
+        dt_Update = #{dtUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcMemo != null" >
+        vc_Memo = #{vcMemo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bibiboy.bean.basic.SysUser" >
+    update sys_user
+    set n_Status = #{nStatus,jdbcType=INTEGER},
+      n_Type = #{nType,jdbcType=INTEGER},
+      vc_User_Name = #{vcUserName,jdbcType=VARCHAR},
+      vc_Pass_Word = #{vcPassWord,jdbcType=VARCHAR},
+      vc_Name = #{vcName,jdbcType=VARCHAR},
+      vc_Tel = #{vcTel,jdbcType=VARCHAR},
+      vc_Email = #{vcEmail,jdbcType=VARCHAR},
+      n_Manager_Flag = #{nManagerFlag,jdbcType=INTEGER},
+      n_Seller_Flag = #{nSellerFlag,jdbcType=INTEGER},
+      n_Repair_Flag = #{nRepairFlag,jdbcType=INTEGER},
+      dt_Reg = #{dtReg,jdbcType=TIMESTAMP},
+      dt_Update = #{dtUpdate,jdbcType=TIMESTAMP},
+      vc_Memo = #{vcMemo,jdbcType=LONGVARCHAR}
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bibiboy.bean.basic.SysUser" >
+    update sys_user
+    set n_Status = #{nStatus,jdbcType=INTEGER},
+      n_Type = #{nType,jdbcType=INTEGER},
+      vc_User_Name = #{vcUserName,jdbcType=VARCHAR},
+      vc_Pass_Word = #{vcPassWord,jdbcType=VARCHAR},
+      vc_Name = #{vcName,jdbcType=VARCHAR},
+      vc_Tel = #{vcTel,jdbcType=VARCHAR},
+      vc_Email = #{vcEmail,jdbcType=VARCHAR},
+      n_Manager_Flag = #{nManagerFlag,jdbcType=INTEGER},
+      n_Seller_Flag = #{nSellerFlag,jdbcType=INTEGER},
+      n_Repair_Flag = #{nRepairFlag,jdbcType=INTEGER},
+      dt_Reg = #{dtReg,jdbcType=TIMESTAMP},
+      dt_Update = #{dtUpdate,jdbcType=TIMESTAMP}
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="findSysUserList" parameterType="com.bibiboy.bean.basic.SysUser" resultType="com.bibiboy.bean.basic.SysUser">
+  	select su.n_Id,su.n_Status,su.vc_User_Name,su.vc_Tel,su.vc_Memo,su.vc_Email,su.n_Manager_Flag,su.n_Seller_Flag,su.n_Repair_Flag,su.dt_Reg,su.dt_Update
+	from sys_user su LEFT JOIN sys_user_role sur on su.n_Id=sur.n_User_Id
+  	<where>
+  		<if test="sysUser.n_Role_Id!='' and sysUser.n_Role_Id!='ALL'">
+  			and sur.n_Role_Id=#{sysUser.n_Role_Id}
+  		</if>
+  		<if test="sysUser.vcUserName!='' and sysUser.vcUserName!=null">
+  			su.vc_User_Name like CONCAT(#{sysUser.vcUserName},'%')
+  		</if>
+  		<if test="sysUser.vcTel!='' and sysUser.vcTel!=null">
+  			and su.vc_Tel=#{sysUser.vcTel}
+  		</if>
+  	</where>
+  </select>
+  
+  <update id="clearSysUserFlag" parameterType="com.bibiboy.bean.basic.SysUser">
+  	update sys_user su
+	set su.n_Manager_Flag=0,n_Seller_Flag=0,n_Repair_Flag=0
+	where su.vc_User_Name=#{sysUser.vcUserName}
+  </update>
+  
+  
+   <!-- <select id="findSysUserList" parameterType="com.bibiboy.bean.basic.SysUser" resultType="com.bibiboy.bean.basic.SysUser">
+  	select su.n_Id,su.n_Status,su.vc_User_Name,su.vc_Tel,su.vc_Memo,su.vc_Email,su.n_Manager_Flag,su.n_Seller_Flag,su.n_Repair_Flag,su.dt_Reg,su.dt_Update
+	from sys_user su
+  	<where>
+  		<if test="sysUser.nStatus!='' and sysUser.nStatus!=null">
+  			and su.n_Status=#{sysUser.nStatus}
+  		</if>
+  		<if test="sysUser.vcUserName!='' and sysUser.vcUserName!=null">
+  			su.vc_User_Name like CONCAT(#{sysUser.vcUserName},'%')
+  		</if>
+  		<if test="sysUser.vcTel!='' and sysUser.vcTel!=null">
+  			and su.vc_Tel=#{sysUser.vcTel}
+  		</if>
+  	</where>
+  </select> -->
+</mapper>

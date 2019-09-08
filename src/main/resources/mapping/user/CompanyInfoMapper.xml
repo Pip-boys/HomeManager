@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bibiboy.mapper.user.CompanyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bibiboy.bean.user.CompanyInfo" >
+    <id column="n_Id" property="nId" jdbcType="INTEGER" />
+    <result column="n_Vip" property="nVip" jdbcType="INTEGER" />
+    <result column="vc_Name" property="vcName" jdbcType="VARCHAR" />
+    <result column="vc_Pic" property="vcPic" jdbcType="VARCHAR" />
+    <result column="vc_Tel" property="vcTel" jdbcType="VARCHAR" />
+    <result column="dt_Reg" property="dtReg" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bibiboy.bean.user.CompanyInfo" extends="BaseResultMap" >
+    <result column="vc_Desc" property="vcDesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    n_Id, n_Vip, vc_Name, vc_Pic, vc_Tel, dt_Reg
+  </sql>
+  <sql id="Blob_Column_List" >
+    vc_Desc
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bibiboy.bean.user.CompanyInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from company_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bibiboy.bean.user.CompanyInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from company_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from company_info
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from company_info
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bibiboy.bean.user.CompanyInfoExample" >
+    delete from company_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bibiboy.bean.user.CompanyInfo" >
+    insert into company_info (n_Id, n_Vip, vc_Name, 
+      vc_Pic, vc_Tel, dt_Reg, 
+      vc_Desc)
+    values (#{nId,jdbcType=INTEGER}, #{nVip,jdbcType=INTEGER}, #{vcName,jdbcType=VARCHAR}, 
+      #{vcPic,jdbcType=VARCHAR}, #{vcTel,jdbcType=VARCHAR}, #{dtReg,jdbcType=TIMESTAMP}, 
+      #{vcDesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bibiboy.bean.user.CompanyInfo" >
+    insert into company_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        n_Id,
+      </if>
+      <if test="nVip != null" >
+        n_Vip,
+      </if>
+      <if test="vcName != null" >
+        vc_Name,
+      </if>
+      <if test="vcPic != null" >
+        vc_Pic,
+      </if>
+      <if test="vcTel != null" >
+        vc_Tel,
+      </if>
+      <if test="dtReg != null" >
+        dt_Reg,
+      </if>
+      <if test="vcDesc != null" >
+        vc_Desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        #{nId,jdbcType=INTEGER},
+      </if>
+      <if test="nVip != null" >
+        #{nVip,jdbcType=INTEGER},
+      </if>
+      <if test="vcName != null" >
+        #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcPic != null" >
+        #{vcPic,jdbcType=VARCHAR},
+      </if>
+      <if test="vcTel != null" >
+        #{vcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="dtReg != null" >
+        #{dtReg,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDesc != null" >
+        #{vcDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bibiboy.bean.user.CompanyInfoExample" resultType="java.lang.Integer" >
+    select count(*) from company_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update company_info
+    <set >
+      <if test="record.nId != null" >
+        n_Id = #{record.nId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nVip != null" >
+        n_Vip = #{record.nVip,jdbcType=INTEGER},
+      </if>
+      <if test="record.vcName != null" >
+        vc_Name = #{record.vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcPic != null" >
+        vc_Pic = #{record.vcPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcTel != null" >
+        vc_Tel = #{record.vcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtReg != null" >
+        dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDesc != null" >
+        vc_Desc = #{record.vcDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update company_info
+    set n_Id = #{record.nId,jdbcType=INTEGER},
+      n_Vip = #{record.nVip,jdbcType=INTEGER},
+      vc_Name = #{record.vcName,jdbcType=VARCHAR},
+      vc_Pic = #{record.vcPic,jdbcType=VARCHAR},
+      vc_Tel = #{record.vcTel,jdbcType=VARCHAR},
+      dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP},
+      vc_Desc = #{record.vcDesc,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update company_info
+    set n_Id = #{record.nId,jdbcType=INTEGER},
+      n_Vip = #{record.nVip,jdbcType=INTEGER},
+      vc_Name = #{record.vcName,jdbcType=VARCHAR},
+      vc_Pic = #{record.vcPic,jdbcType=VARCHAR},
+      vc_Tel = #{record.vcTel,jdbcType=VARCHAR},
+      dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bibiboy.bean.user.CompanyInfo" >
+    update company_info
+    <set >
+      <if test="nVip != null" >
+        n_Vip = #{nVip,jdbcType=INTEGER},
+      </if>
+      <if test="vcName != null" >
+        vc_Name = #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcPic != null" >
+        vc_Pic = #{vcPic,jdbcType=VARCHAR},
+      </if>
+      <if test="vcTel != null" >
+        vc_Tel = #{vcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="dtReg != null" >
+        dt_Reg = #{dtReg,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDesc != null" >
+        vc_Desc = #{vcDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bibiboy.bean.user.CompanyInfo" >
+    update company_info
+    set n_Vip = #{nVip,jdbcType=INTEGER},
+      vc_Name = #{vcName,jdbcType=VARCHAR},
+      vc_Pic = #{vcPic,jdbcType=VARCHAR},
+      vc_Tel = #{vcTel,jdbcType=VARCHAR},
+      dt_Reg = #{dtReg,jdbcType=TIMESTAMP},
+      vc_Desc = #{vcDesc,jdbcType=LONGVARCHAR}
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bibiboy.bean.user.CompanyInfo" >
+    update company_info
+    set n_Vip = #{nVip,jdbcType=INTEGER},
+      vc_Name = #{vcName,jdbcType=VARCHAR},
+      vc_Pic = #{vcPic,jdbcType=VARCHAR},
+      vc_Tel = #{vcTel,jdbcType=VARCHAR},
+      dt_Reg = #{dtReg,jdbcType=TIMESTAMP}
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+</mapper>

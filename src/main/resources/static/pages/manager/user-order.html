@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>订单管理</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png"
+	href="../../js/amazeUI/assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed"
+	href="../../js/amazeUI/assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<script src="../../js/amazeUI/assets/js/echarts.min.js"></script>
+<link rel="stylesheet"
+	href="../../js/amazeUI/assets/css/amazeui.min.css" />
+<link rel="stylesheet"
+	href="../../js/amazeUI/assets/css/amazeui.datatables.min.css" />
+<link rel="stylesheet" href="../../js/amazeUI/assets/css/app.css">
+<link rel="stylesheet" href="../../css/mricode.pagination.css">
+<script src="../../js/amazeUI/assets/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../../js/common/mricode.pagination.js"></script>
+<script type="text/javascript" src="../../js/common/init-common-jq.js"></script>
+</head>
+
+<body data-type="widgets">
+	<script src="../../js/amazeUI/assets/js/theme.js"></script>
+	
+	<div class="am-g tpl-g">
+		<!-- 头部 -->
+		<header>
+			<!-- logo -->
+			<div class="am-fl tpl-header-logo">
+				<a href="host"><img
+					src="../../js/amazeUI/assets/img/logo.png" alt=""></a>
+			</div>
+			<!-- 右侧内容 -->
+			<div class="tpl-header-fluid">
+				<!-- 侧边切换 -->
+				<div class="am-fl tpl-header-switch-button am-icon-list">
+					<span> </span>
+				</div>
+				<!-- 搜索 -->
+				<div class="am-fl tpl-header-search">
+					<form class="tpl-header-search-form" action="javascript:;">
+						<button class="tpl-header-search-btn am-icon-search"></button>
+						<input class="tpl-header-search-box" type="text"
+							placeholder="搜索内容...">
+					</form>
+				</div>
+				<!-- 其它功能-->
+				<div class="am-fr tpl-header-navbar">
+					<ul>
+						<!-- 欢迎语 -->
+						<li class="am-text-sm tpl-header-navbar-welcome"><a
+							href="javascript:;">欢迎你, <span>Amaze UI</span>
+						</a></li>
+
+						<!-- 新邮件 -->
+						<li class="am-dropdown tpl-dropdown" data-am-dropdown><a
+							href="javascript:;"
+							class="am-dropdown-toggle tpl-dropdown-toggle"
+							data-am-dropdown-toggle> <i class="am-icon-envelope"></i> <span
+								class="am-badge am-badge-success am-round item-feed-badge">4</span>
+						</a> <!-- 弹出列表 -->
+							<ul class="am-dropdown-content tpl-dropdown-content">
+								<li class="tpl-dropdown-menu-messages"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-messages-item am-cf">
+										<div class="menu-messages-ico">
+											<img src="../../js/amazeUI/assets/img/user04.png" alt="">
+										</div>
+										<div class="menu-messages-time">3小时前</div>
+										<div class="menu-messages-content">
+											<div class="menu-messages-content-title">
+												<i class="am-icon-circle-o am-text-success"></i> <span>夕风色</span>
+											</div>
+											<div class="am-text-truncate">Amaze UI 的诞生，依托于 GitHub
+												及其他技术社区上一些优秀的资源；Amaze UI 的成长，则离不开用户的支持。</div>
+											<div class="menu-messages-content-time">2016-09-21 下午
+												16:40</div>
+										</div>
+								</a></li>
+
+								<li class="tpl-dropdown-menu-messages"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-messages-item am-cf">
+										<div class="menu-messages-ico">
+											<img src="../../js/amazeUI/assets/img/user02.png" alt="">
+										</div>
+										<div class="menu-messages-time">5天前</div>
+										<div class="menu-messages-content">
+											<div class="menu-messages-content-title">
+												<i class="am-icon-circle-o am-text-warning"></i> <span>禁言小张</span>
+											</div>
+											<div class="am-text-truncate">为了能最准确的传达所描述的问题，
+												建议你在反馈时附上演示，方便我们理解。</div>
+											<div class="menu-messages-content-time">2016-09-16 上午
+												09:23</div>
+										</div>
+								</a></li>
+								<li class="tpl-dropdown-menu-messages"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-messages-item am-cf"> <i
+										class="am-icon-circle-o"></i> 进入列表…
+								</a></li>
+							</ul></li>
+
+						<!-- 新提示 -->
+						<li class="am-dropdown" data-am-dropdown><a
+							href="javascript:;" class="am-dropdown-toggle"
+							data-am-dropdown-toggle> <i class="am-icon-bell"></i> <span
+								class="am-badge am-badge-warning am-round item-feed-badge">5</span>
+						</a> <!-- 弹出列表 -->
+							<ul class="am-dropdown-content tpl-dropdown-content">
+								<li class="tpl-dropdown-menu-notifications"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-notifications-item am-cf">
+										<div class="tpl-dropdown-menu-notifications-title">
+											<i class="am-icon-line-chart"></i> <span> 有6笔新的销售订单</span>
+										</div>
+										<div class="tpl-dropdown-menu-notifications-time">12分钟前
+										</div>
+								</a></li>
+								<li class="tpl-dropdown-menu-notifications"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-notifications-item am-cf">
+										<div class="tpl-dropdown-menu-notifications-title">
+											<i class="am-icon-star"></i> <span> 有3个来自人事部的消息</span>
+										</div>
+										<div class="tpl-dropdown-menu-notifications-time">30分钟前
+										</div>
+								</a></li>
+								<li class="tpl-dropdown-menu-notifications"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-notifications-item am-cf">
+										<div class="tpl-dropdown-menu-notifications-title">
+											<i class="am-icon-folder-o"></i> <span> 上午开会记录存档</span>
+										</div>
+										<div class="tpl-dropdown-menu-notifications-time">1天前</div>
+								</a></li>
+
+
+								<li class="tpl-dropdown-menu-notifications"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-notifications-item am-cf"> <i
+										class="am-icon-bell"></i> 进入列表…
+								</a></li>
+							</ul></li>
+
+						<!-- 退出 -->
+						<li class="am-text-sm"><a href="/logout"> <span
+								class="am-icon-sign-out"></span> 退出
+						</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</header>
+		<!-- 风格切换 -->
+		<div class="tpl-skiner">
+			<div class="tpl-skiner-toggle am-icon-cog"></div>
+			<div class="tpl-skiner-content">
+				<div class="tpl-skiner-content-title">选择主题</div>
+				<div class="tpl-skiner-content-bar">
+					<span class="skiner-color skiner-white" data-color="theme-white"></span>
+					<span class="skiner-color skiner-black" data-color="theme-black"></span>
+				</div>
+			</div>
+		</div>
+			
+		<!-- 侧边导航栏 -->
+		<div class="left-sidebar" id="leftMenu">
+            
+        </div>
+		
+		<!-- 确认模态框 -->
+		<div class="am-modal am-modal-confirm" tabindex="-1" id="confirm">
+		  <div class="am-modal-dialog">
+		    <div class="am-modal-hd">系统提示</div>
+		    <div class="am-modal-bd" id="descript">
+		   	
+		    </div>
+		    <div class="am-modal-footer">
+		      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+		      <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- 订单模态框 -->
+		<div class="am-modal am-modal-prompt" tabindex="-1" id="orderDialog">
+			<div class="am-modal-dialog" id="orderDialogVue">
+				<form class="am-form" method="post" id="orderForm">
+					<fieldset>
+						<legend>详情</legend>
+							<div class="am-form-group">
+								<img style="width: 50%;margin-left: 25%;" class="am-round am-img-responsive" alt="140*140" :src="order.vcPic" />
+							</div>
+							<div class="am-form-group">
+								<label for="doc-ipt-email-1">设备名称</label> 
+								<span>{{order.vcName}}</span>
+							</div>
+							<div class="am-form-group">
+								<label for="doc-ipt-email-1">设备型号</label> 
+								<span>{{order.vcModel}}</span>
+							</div>
+							<div class="am-form-group">
+								<label for="doc-ipt-email-1">收货地址</label> 
+								<span>{{order.vcPlace}}</span>
+							</div>
+							<div class="am-form-group">
+								<label for="doc-ipt-email-1">实际付款</label> 
+								<span>{{order.dPrice}}</span>
+							</div>
+							<div class="am-form-group">
+								<label for="doc-ipt-email-1">订单状态</label> 
+								<span>{{order.nStatus | getnStatus}}</span>
+							</div>
+							<div class="am-form-group">
+								<label for="doc-ipt-email-1">更新时间</label> 
+								<span>{{order.dtUpdate | dateFmtYMDHMS}}</span>
+							</div>
+						</p>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		
+		<!-- 内容区域 -->
+		<div class="tpl-content-wrapper">
+			<div class="row-content am-cf">
+				<div class="row">
+					<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+						<div class="widget am-cf">
+							<div class="widget-head am-cf">
+								<div class="widget-title  am-cf">订单列表</div>
+							</div>
+							<div class="widget-body  am-fr">
+
+								<div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+									<div class="am-form-group">
+										<div class="am-btn-toolbar">
+											<div class="am-btn-group am-btn-group-xs">
+												<button type="button" id="addValueBtn"
+													class="am-btn am-btn-default am-btn-success">
+													<span class="am-icon-plus"></span> 新增
+												</button>
+												<button type="button"
+													class="am-btn am-btn-default am-btn-secondary"
+													onclick="saveValue()">
+													<span class="am-icon-save"></span> 保存
+												</button>
+												<button type="button"
+													class="am-btn am-btn-default am-btn-warning" onclick="">
+													<span class="am-icon-archive"></span> 审核
+												</button>
+												<button type="button"
+													class="am-btn am-btn-default am-btn-danger"
+													onclick="deleteValue()">
+													<span class="am-icon-trash-o"></span> 删除
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="am-u-sm-12" id="orderListVue">
+                                    <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>设备图片</th>
+                                                <th>设备名称</th>
+                                                <th>状态</th>
+                                                <th>下单时间</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="even gradeC" v-for="(item,index) in orderList">
+                                                <td class="am-text-middle">{{index+1}}</td>
+                                                <td>
+                                                    <img :src="item.vcPic" class="tpl-table-line-img" @click="catDetail(item)" alt="">
+                                                </td>
+                                                <td class="am-text-middle" >{{item.vcName}}</td>
+                                                <td class="am-text-middle">{{item.nStatus | getnStatus}}</td>
+                                                <td class="am-text-middle">{{item.dtOrder | dateFmtYMDHMS}}</td>
+                                                <td class="am-text-middle">
+                                                    <div class="tpl-table-black-operation">
+                                                   		<a @click="catDetail(item)" href="javascript:;"> <i class="am-icon-eye"></i>详情</a>
+                                                        <a v-if="item.nStatus==0" @click="changenStatus(item)" href="javascript:;"> <i class="am-icon-money"></i>付款</a>
+                                                        <a v-else-if="item.nStatus==2" @click="changenStatus(item)" href="javascript:;"> <i class="am-icon-pencil"></i>确认收货</a>
+                                                    	<a v-else-if="item.nStatus==3" href="javascript:;"> <i class="am-icon-sellsy"></i>评价</a>
+                                                    	<a href="javascript:;" class="tpl-table-black-operation-del"> <i class="am-icon-hand-paper-o"></i>退/换货</a>
+                                                    	<a @click="deleteValue(item)" href="javascript:;" class="tpl-table-black-operation-del" v-if="item.nStatus>=3"> <i class="am-icon-trash"></i>删除记录</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- more data -->
+                                        </tbody>
+                                    </table>
+                                </div>
+								<div class="am-u-lg-12 am-cf">
+									<div id="pagination" class="m-pagination"
+										style="margin-left: 40%; float: none; margin-top: 10%;"></div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	</div>
+	<script src="../../js/amazeUI/assets/js/amazeui.min.js"></script>
+	<script src="../../js/amazeUI/assets/js/amazeui.datatables.min.js"></script>
+	<script src="../../js/amazeUI/assets/js/dataTables.responsive.min.js"></script>
+	<script src="../../js/amazeUI/assets/js/app.js"></script>
+
+	<script src="../../js/vue.js"></script>
+	<script type="text/javascript"
+		src="../../js/amazeUI/assets/js/axios.min.js"></script>
+	<script type="text/javascript" src="../../js/common/init-menu-vue.js"></script>
+	<script type="text/javascript" src="../../js/common/left-menu.js"></script>
+	<script type="text/javascript">
+		var baseUrl=host+'/order/order';
+		var obj=new Object();
+		var orderListVue = new Vue({
+			el : '#orderListVue',
+			data : {
+				orderList : []
+			},
+			methods : {
+				editValue : function(item) {
+					//menuDialogVue.sysMenu=item;
+					orderDialogVue.order= clone(item);
+					$('#menuDialog').modal({
+						relatedTarget: this
+					});
+				},
+				deleteValue : function(item){
+					this.$http.delete(baseUrl+'/'+item.nId).then(response => {
+						var data=response.data;
+						alert(data.msg);
+						if(data.status==200){
+							reloadTable();
+						}
+					}).catch((err) => {
+		                alert("网络异常");
+					});
+				},
+				changenStatus : function(item){
+					obj.nId=item.nId;
+					if(item.nStatus==0){
+						$("#descript").html('确认付款？');
+						obj.nStatus=2;
+					}else if(item.nStatus==2){
+						$("#descript").html('确认收货？');
+						obj.nStatus=3;
+					}
+					$('#confirm').modal({
+						relatedTarget: this,
+						onConfirm: function(options) {
+							var params=JSON.stringify(obj);
+							axios.post(baseUrl,params).then(response => {
+						    	var data=response.data;
+						    	alert(data.msg)
+								if(data.status==200){
+									$('#confirm').modal('close');
+									reloadTable();					
+								}
+						    }).catch(error => {
+						      console.log(error)
+						    })
+						}
+					});
+				},
+				catDetail : function(item){
+					orderDialogVue.order=item;
+					$('#orderDialog').modal({
+						relatedTarget: this
+					});
+					
+				}
+			},
+	        filters:{
+	            getnStatus : function(val){
+	            	switch (val) {
+	            	case 0:
+	            		msg="待付款"
+	            		break;
+	        		case 1:
+	        			msg="已付款";
+	        			break;
+	        		case 2:
+	        			msg="已发货";
+	        			break;
+	        		case 3:
+	        			msg="已签收";
+	        			break;
+	        		case 4:
+	        			msg="已评价";
+	        			break;
+	        		case 5:
+	        			msg="已发起退货";
+	        			break;
+	        		case 6:
+	        			msg="退货成功";
+	        			break;
+	        		default:
+	        			msg="无数据";
+	        			break;
+	        		}
+	            	return msg;
+	            }
+	        }
+		})
+		
+		//模态框vue对象
+		var orderDialogVue=new Vue({
+			el : '#orderDialogVue',
+			data : {
+				order : {}
+			},
+	        filters:{
+	            getnStatus : function(val){
+	            	switch (val) {
+	            	case 0:
+	            		msg="待付款"
+	            		break;
+	        		case 1:
+	        			msg="已付款";
+	        			break;
+	        		case 2:
+	        			msg="已发货";
+	        			break;
+	        		case 3:
+	        			msg="已签收";
+	        			break;
+	        		case 4:
+	        			msg="已评价";
+	        			break;
+	        		case 5:
+	        			msg="已发起退货";
+	        			break;
+	        		case 6:
+	        			msg="退货成功";
+	        			break;
+	        		default:
+	        			msg="无数据";
+	        			break;
+	        		}
+	            	return msg;
+	            }
+	        }
+		});
+	</script>
+	<script type="text/javascript">
+	$(function() {
+		var baseUrl=host+'/order/order';
+		$("#pagination").css('float', 'none');
+		$("#pagination").pagination({
+			remote : {
+				beforeSend: $.AMUI.progress.start(), 
+				complete: $.AMUI.progress.done(),
+				url : baseUrl,
+				success : function(result) {
+					orderListVue.orderList = result.rows;
+				}
+			}
+		});
+	})
+	
+	//重新载入tableList信息
+	function reloadTable(){
+		var url = baseUrl;
+   	    $("#pagination").pagination('setRemoteUrl', url);
+   	   	$("#pagination").pagination('remote');
+	}
+	
+	/* //新增用户模态框校验器
+	$('#menuForm').validator({
+        validateOnSubmit: true,
+        submit: function() {
+            if(this.isFormValid()) {
+            	menuDialogVue.submit();
+            }
+            return false;
+        }
+	}); */
+	</script>
+</body>
+
+</html>

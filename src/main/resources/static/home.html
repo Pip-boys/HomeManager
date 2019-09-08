@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>登陆成功</h1>
+<a href="/admin">检测ROLE_ADMIN角色</a>
+<a href="/admin2">检测ROLE_ADMIN2角色</a>
+<a href="/user">检测ROLE_USER角色</a>
+<a href="/user2">检测ROLE_USER2角色</a>
+<button onclick="test()"></button>
+<button onclick="window.location.href='/logout'">退出登录</button>
+<div id="result"></div>
+</body>
+<script src="js/vue.min.js"></script>
+<script>Vue.config.productionTip=false</script>
+<script type="text/javascript" src="js/amazeUI/assets/js/axios.min.js"></script>
+<script type="text/javascript">
+
+	var token=localStorage.getItem("token");
+	//细节处理一：可以给axios的ajax请求设置统一的主机和端口号
+	axios.defaults.baseURL = "http://localhost:8080/";
+	axios.defaults.headers.post['token'] = token;
+	axios.defaults.withCredentials = true;
+	//细节处理二: 可以将axios这个对象添加到Vue的原型对象中，将来在使用的时候就只需要使用this.对象名就可以了
+	Vue.prototype.$http = axios;
+	
+	function test(){
+		axios.post('http://localhost:8080/admin').then(response => {
+	    	var data=response.data;
+			if(data.status==200){
+				
+			}else{
+				
+			}
+	    }).catch(error => {
+	      console.log(error)
+	    })
+	}
+	
+	if(typeof(Storage)!=="undefined")
+	{
+	  localStorage.sitename="菜鸟教程";
+	  document.getElementById("result").innerHTML="网站名：" + localStorage.sitename;
+	  var temp=localStorage.getItem("token");
+	  console.log(temp);
+	}
+	else
+	{
+	  document.getElementById("result").innerHTML="对不起，您的浏览器不支持 web 存储。";
+	}
+</script>
+</html>

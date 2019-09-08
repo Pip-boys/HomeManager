@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>角色管理</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png"
+	href="../../js/amazeUI/assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed"
+	href="../../js/amazeUI/assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<script src="../../js/amazeUI/assets/js/echarts.min.js"></script>
+<link rel="stylesheet"
+	href="../../js/amazeUI/assets/css/amazeui.min.css" />
+<link rel="stylesheet"
+	href="../../js/amazeUI/assets/css/amazeui.datatables.min.css" />
+<link rel="stylesheet" href="../../js/amazeUI/assets/css/app.css">
+<link rel="stylesheet" href="../../css/mricode.pagination.css">
+<script src="../../js/amazeUI/assets/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../../js/common/mricode.pagination.js"></script>
+<script type="text/javascript" src="../../js/common/init-common-jq.js"></script>
+</head>
+
+<body data-type="widgets">
+	<script src="../../js/amazeUI/assets/js/theme.js"></script>
+	
+	<div class="am-g tpl-g">
+		<!-- 头部 -->
+		<header>
+			<!-- logo -->
+			<div class="am-fl tpl-header-logo">
+				<a href="host"><img
+					src="../../js/amazeUI/assets/img/logo.png" alt=""></a>
+			</div>
+			<!-- 右侧内容 -->
+			<div class="tpl-header-fluid">
+				<!-- 侧边切换 -->
+				<div class="am-fl tpl-header-switch-button am-icon-list">
+					<span> </span>
+				</div>
+				<!-- 搜索 -->
+				<div class="am-fl tpl-header-search">
+					<form class="tpl-header-search-form" action="javascript:;">
+						<button class="tpl-header-search-btn am-icon-search"></button>
+						<input class="tpl-header-search-box" type="text"
+							placeholder="搜索内容...">
+					</form>
+				</div>
+				<!-- 其它功能-->
+				<div class="am-fr tpl-header-navbar">
+					<ul>
+						<!-- 欢迎语 -->
+						<li class="am-text-sm tpl-header-navbar-welcome"><a
+							href="javascript:;">欢迎你, <span>Amaze UI</span>
+						</a></li>
+
+						<!-- 新邮件 -->
+						<li class="am-dropdown tpl-dropdown" data-am-dropdown><a
+							href="javascript:;"
+							class="am-dropdown-toggle tpl-dropdown-toggle"
+							data-am-dropdown-toggle> <i class="am-icon-envelope"></i> <span
+								class="am-badge am-badge-success am-round item-feed-badge">4</span>
+						</a> <!-- 弹出列表 -->
+							<ul class="am-dropdown-content tpl-dropdown-content">
+								<li class="tpl-dropdown-menu-messages"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-messages-item am-cf">
+										<div class="menu-messages-ico">
+											<img src="../../js/amazeUI/assets/img/user04.png" alt="">
+										</div>
+										<div class="menu-messages-time">3小时前</div>
+										<div class="menu-messages-content">
+											<div class="menu-messages-content-title">
+												<i class="am-icon-circle-o am-text-success"></i> <span>夕风色</span>
+											</div>
+											<div class="am-text-truncate">Amaze UI 的诞生，依托于 GitHub
+												及其他技术社区上一些优秀的资源；Amaze UI 的成长，则离不开用户的支持。</div>
+											<div class="menu-messages-content-time">2016-09-21 下午
+												16:40</div>
+										</div>
+								</a></li>
+
+								<li class="tpl-dropdown-menu-messages"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-messages-item am-cf">
+										<div class="menu-messages-ico">
+											<img src="../../js/amazeUI/assets/img/user02.png" alt="">
+										</div>
+										<div class="menu-messages-time">5天前</div>
+										<div class="menu-messages-content">
+											<div class="menu-messages-content-title">
+												<i class="am-icon-circle-o am-text-warning"></i> <span>禁言小张</span>
+											</div>
+											<div class="am-text-truncate">为了能最准确的传达所描述的问题，
+												建议你在反馈时附上演示，方便我们理解。</div>
+											<div class="menu-messages-content-time">2016-09-16 上午
+												09:23</div>
+										</div>
+								</a></li>
+								<li class="tpl-dropdown-menu-messages"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-messages-item am-cf"> <i
+										class="am-icon-circle-o"></i> 进入列表…
+								</a></li>
+							</ul></li>
+
+						<!-- 新提示 -->
+						<li class="am-dropdown" data-am-dropdown><a
+							href="javascript:;" class="am-dropdown-toggle"
+							data-am-dropdown-toggle> <i class="am-icon-bell"></i> <span
+								class="am-badge am-badge-warning am-round item-feed-badge">5</span>
+						</a> <!-- 弹出列表 -->
+							<ul class="am-dropdown-content tpl-dropdown-content">
+								<li class="tpl-dropdown-menu-notifications"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-notifications-item am-cf">
+										<div class="tpl-dropdown-menu-notifications-title">
+											<i class="am-icon-line-chart"></i> <span> 有6笔新的销售订单</span>
+										</div>
+										<div class="tpl-dropdown-menu-notifications-time">12分钟前
+										</div>
+								</a></li>
+								<li class="tpl-dropdown-menu-notifications"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-notifications-item am-cf">
+										<div class="tpl-dropdown-menu-notifications-title">
+											<i class="am-icon-star"></i> <span> 有3个来自人事部的消息</span>
+										</div>
+										<div class="tpl-dropdown-menu-notifications-time">30分钟前
+										</div>
+								</a></li>
+								<li class="tpl-dropdown-menu-notifications"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-notifications-item am-cf">
+										<div class="tpl-dropdown-menu-notifications-title">
+											<i class="am-icon-folder-o"></i> <span> 上午开会记录存档</span>
+										</div>
+										<div class="tpl-dropdown-menu-notifications-time">1天前</div>
+								</a></li>
+
+
+								<li class="tpl-dropdown-menu-notifications"><a
+									href="javascript:;"
+									class="tpl-dropdown-menu-notifications-item am-cf"> <i
+										class="am-icon-bell"></i> 进入列表…
+								</a></li>
+							</ul></li>
+
+						<!-- 退出 -->
+						<li class="am-text-sm"><a href="/logout"> <span
+								class="am-icon-sign-out"></span> 退出
+						</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</header>
+		<!-- 风格切换 -->
+		<div class="tpl-skiner">
+			<div class="tpl-skiner-toggle am-icon-cog"></div>
+			<div class="tpl-skiner-content">
+				<div class="tpl-skiner-content-title">选择主题</div>
+				<div class="tpl-skiner-content-bar">
+					<span class="skiner-color skiner-white" data-color="theme-white"></span>
+					<span class="skiner-color skiner-black" data-color="theme-black"></span>
+				</div>
+			</div>
+		</div>
+		
+			
+		
+		<!-- 角色模态框 -->
+		<div class="am-modal am-modal-prompt" tabindex="-1" id="dialog">
+			<div class="am-modal-dialog" id="sysRoleFormDiv">
+				<form class="am-form" action="/sysUser/testPut" method="post" id="sysRoleForm">
+					<fieldset>
+						<legend>角色管理</legend>
+						<input type="hidden" name="_method" value="put">
+						<div class="am-form-group">
+							<label for="doc-ipt-username-1">角色名称</label>
+							<input maxlength="10" v-model="sysRole.vcName" required="required" class="am-form-field am-round" type="text" name="vcName" placeholder="设置角色名">
+						</div>
+						
+						<div class="am-form-group">
+							<label for="doc-ipt-pwd-1">验证名称</label>
+							<input class="am-form-field am-round" v-model="sysRole.vcSecurityName" required="required" maxlength="20" type="text" name="vcSecurityName" placeholder="设置验证名称">
+						</div>
+						
+						<div class="am-form-group">
+							<label for="doc-ipt-tel-1">排序</label>
+							<input type="number" class="am-form-field am-round" v-model="sysRole.nSort" required="required" name="nSort" placeholder="排序号越小越靠前">
+						</div>
+
+						<p>
+							<button type="submit" class="am-btn am-btn-default">提交</button>
+						</p>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<!-- 角色-权限模态框 -->
+		<div class="am-modal am-modal-prompt" tabindex="-1" id="dialogSysPermission">
+			<div class="am-modal-dialog" id="sysPermissionFormDiv">
+				<form class="am-form" action="/sysUser/testPut" method="post" id="sysPermissionForm">
+					<fieldset>
+						<legend>角色-权限管理</legend>
+						<button type="button" @click="addPermission" class="am-btn am-btn-default am-round">新添</button>
+						<hr/>
+						
+						<div v-for="(item,index) in permissionList">
+							<div class="am-form-group">
+								<label for="doc-ipt-username-1">URL</label>
+								<input v-model="item.vcUrl" maxlength="10" required="required" class="am-form-field am-round" type="text" placeholder="后台验证路径">
+								<span>
+									<input value="s" v-model="item.permissions" type="checkbox" style="width: 5%;" name="permissions" minchecked="1" required data-validation-message="权限至少选择一项">{{getDesc('s')}}
+								</span>
+								<span>
+									<input value="a" v-model="item.permissions" type="checkbox" style="width: 5%;">{{getDesc('a')}}
+								</span>
+								<span>
+									<input value="u" v-model="item.permissions" type="checkbox" style="width: 5%;">{{getDesc('u')}}
+								</span>
+								<span>
+									<input value="d" v-model="item.permissions" type="checkbox" style="width: 5%;">{{getDesc('d')}}
+								</span>
+								<div>
+									<button @click="remove(index)" class="am-btn am-btn-danger am-round">删除权限</button>
+								</div>
+							</div>
+						<hr/>
+						</div>
+						
+						<p>
+							<button type="submit" class="am-btn am-btn-default">提交</button>
+						</p>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		
+		<!-- 侧边导航栏 -->
+		<div class="left-sidebar" id="leftMenu">
+            
+        </div>
+
+		<!-- 内容区域 -->
+		<div class="tpl-content-wrapper">
+			<div class="row-content am-cf">
+				<div class="row">
+					<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+						<div class="widget am-cf">
+							<div class="widget-head am-cf">
+								<div class="widget-title  am-cf">角色列表</div>
+
+
+							</div>
+							<div class="widget-body  am-fr">
+
+
+
+								<div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+									<div class="am-form-group">
+										<div class="am-btn-toolbar">
+											<div class="am-btn-group am-btn-group-xs">
+												<button type="button" id="addValueBtn"
+													class="am-btn am-btn-default am-btn-success">
+													<span class="am-icon-plus"></span> 新增
+												</button>
+												<button type="button"
+													class="am-btn am-btn-default am-btn-secondary"
+													onclick="saveValue()">
+													<span class="am-icon-save"></span> 保存
+												</button>
+												<button type="button"
+													class="am-btn am-btn-default am-btn-warning" onclick="">
+													<span class="am-icon-archive"></span> 审核
+												</button>
+												<button type="button"
+													class="am-btn am-btn-default am-btn-danger"
+													onclick="deleteValue()">
+													<span class="am-icon-trash-o"></span> 删除
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="am-u-sm-12" id="roleListVue">
+									<table width="100%"
+										class="am-table am-table-compact am-table-striped tpl-table-black "
+										id="example-r">
+										<thead>
+											<tr>
+												<th>序号</th>
+												<th>角色名</th>
+												<th>验证名称</th>
+												<th>排序</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="gradeX" v-for="(item,index) in roleList">
+												<td>{{index+1}}</td>
+												<td>{{item.vcName}}</td>
+												<td>{{item.vcSecurityName}}</td>
+												<td>{{item.nSort}}</td>
+												<td>
+													<div class="tpl-table-black-operation">
+														<a @click="editValue(item)" href="javascript:;"> <i class="am-icon-pencil"></i> 编辑</a> 
+														<a @click="editPermission(item)" href="javascript:;" class="tpl-table-black-operation-del"></i > 权限设置</a>
+														<a @click="deleteValue(item)" href="javascript:;" class="tpl-table-black-operation-del"> <i class="am-icon-trash"></i> 删除</a>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="am-u-lg-12 am-cf">
+									<div id="pagination" class="m-pagination"
+										style="margin-left: 40%; float: none; margin-top: 10%;"></div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	</div>
+	<script src="../../js/amazeUI/assets/js/amazeui.min.js"></script>
+	<script src="../../js/amazeUI/assets/js/amazeui.datatables.min.js"></script>
+	<script src="../../js/amazeUI/assets/js/dataTables.responsive.min.js"></script>
+	<script src="../../js/amazeUI/assets/js/app.js"></script>
+
+	<script src="../../js/vue.js"></script>
+	<script type="text/javascript"
+		src="../../js/amazeUI/assets/js/axios.min.js"></script>
+	<script type="text/javascript" src="../../js/common/init-menu-vue.js"></script>
+	<script type="text/javascript" src="../../js/common/left-menu.js"></script>
+	<script type="text/javascript">
+		var baseUrl=host+'/sysRole/sysRole';
+		//table表格显示Vue列表
+		var roleListVue=new Vue({
+		    	el:"#roleListVue",
+		    	data:{
+		    		roleList:[],
+		    		nId:[]
+		    	},
+				methods : {
+					editValue : function(item) {
+						sysRoleFormDiv.model="update";
+						sysRoleFormDiv.sysRole=item;
+						$('#dialog').modal({
+							relatedTarget: this
+						});
+					},
+					deleteValue : function(item){
+						this.$http.delete(baseUrl+"/"+item.nId).then(response => {
+							var data=response.data;
+							alert(data.msg);
+							if(data.status==200){
+								reloadTable();
+							}
+						}).catch((err) => {
+			                alert("网络异常");
+						});
+					},
+					editPermission(item){
+						this.$http.get(host+'/sysPermission/sysPermission?nId='+item.nId).then(response => {
+							sysPermissionFormDiv.nRoleId=item.nId;
+							var data=response.data;
+							if(data.status==400){
+								alert(data.msg)
+							}else{
+								sysPermissionFormDiv.permissionList=data.rows;
+								$('#dialogSysPermission').modal({
+									relatedTarget: this
+								});
+							}						
+						}).catch((err) => {
+			                alert("网络异常");
+						});
+					}
+				}
+	   	})
+		
+		//权限修改模态Vue对象
+		var sysPermissionFormDiv=new Vue({
+			el : '#sysPermissionFormDiv',
+			data : {
+				permissionList : [
+					
+				]
+			},
+			methods : {
+				submit : function() {
+					var params=JSON.stringify(this.permissionList);
+					this.$http.post(host+'/sysPermission/sysPermission',params).then(response => {
+						var data=response.data;
+						if(data.status==200){
+							alert(data.msg);
+							this.permissionList=[];
+							$('#dialogSysPermission').modal({
+								relatedTarget: this
+							});
+						}else{
+							alert(data.msg);
+						}						
+					}).catch((err) => {
+		                alert("网络异常");
+					});
+				},
+				addPermission : function(){
+					var sysPermission = new Object();
+					sysPermission.vcUrl='';
+					sysPermission.nRoleId=sysPermissionFormDiv.nRoleId;
+					sysPermission.permissions=[];
+					sysPermissionFormDiv.permissionList.push(sysPermission);
+				},
+				getDesc(temp){
+					switch(temp)
+					{
+						case "s":
+						  return "查询";
+						  break;
+						case "a":
+							return "新增";
+						  break;
+						case "u":
+							return "更新";
+						  break;
+						case "d":
+							return "删除";
+						  break;
+						default:
+						 	
+					}
+				},
+				remove(index){
+					this.permissionList.splice(index,1);
+				}
+			}
+		}) 
+		
+		//角色修改Vue对象
+		var sysRoleFormDiv=new Vue({
+			el : '#sysRoleFormDiv',
+			data : {
+				sysRole : {
+					
+				},
+				model:'add'
+			},
+			methods : {
+				submit : function() {
+					var params=JSON.stringify(this.sysRole);
+					if(sysRoleFormDiv.model=="add"){
+						this.$http.put(baseUrl,params).then(response => {
+							var data=response.data;
+							alert(data.msg);
+							if(data.status==200){
+								this.sysRole={};
+								reloadTable();
+								$('#dialog').modal('close');
+							}
+						}).catch((err) => {
+			                alert("网络异常");
+						});
+					}else if(sysRoleFormDiv.model=="update"){
+						this.$http.post(baseUrl,params).then(response => {
+							var data=response.data;
+							alert(data.msg);
+							if(data.status==200){
+								this.sysUser={};
+								reloadTable();
+								$('#dialog').modal('close');				
+							}
+						}).catch((err) => {
+			                alert("网络异常");
+						});
+					}
+					
+				}
+			}
+		});
+		
+	</script>
+	
+	<script type="text/javascript">
+	$(function(){
+		var baseUrl=host+'/sysRole/sysRole';
+		$("#pagination").css('float', 'none');
+		$("#pagination").pagination({
+			remote : {
+				beforeSend: $.AMUI.progress.start(), 
+				complete: $.AMUI.progress.done(),
+				url : baseUrl+'?nId='+roleListVue.nId,
+				success : function(result) {
+					roleListVue.roleList = result.rows;
+				}
+			}
+		});
+	})
+	function reloadTable(){
+		var url = baseUrl+'?nId='+roleListVue.nId;
+   	    $("#pagination").pagination('setRemoteUrl', url);
+   	   	$("#pagination").pagination('remote');
+	}
+	
+	$('#addValueBtn').on('click', function() {
+		sysRoleFormDiv.model="add";
+		sysRoleFormDiv.sysRole={};
+		$('#dialog').modal({
+		  relatedTarget: this
+		});
+	});
+	
+	$('#sysRoleForm').validator({
+           validateOnSubmit: true,
+           submit: function() {
+           	if(this.isFormValid()) {
+           		sysRoleFormDiv.submit();
+               }
+               return false;
+           }
+	});
+	
+	$('#sysPermissionForm').validator({
+        validateOnSubmit: true,
+        submit: function() {
+            if(this.isFormValid()) {
+            	sysPermissionFormDiv.submit();
+                return false;
+            }
+            return false;
+        },
+        onValid: function(validity) {
+            $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+        },
+        onInValid: function(validity) {
+            var $field = $(validity.field);
+            var $group = $field.closest('.am-form-group');
+            var $alert = $group.find('.am-alert');
+            // 使用自定义的提示信息 或 插件内置的提示信息
+            var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+            if (!$alert.length) {
+              $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+                appendTo($group);
+            }
+            $alert.html(msg).show();
+          }
+	});
+	</script>
+</body>
+
+</html>

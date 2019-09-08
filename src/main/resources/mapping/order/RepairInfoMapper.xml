@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bibiboy.mapper.order.RepairInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bibiboy.bean.order.RepairInfo" >
+    <id column="n_Id" property="nId" jdbcType="INTEGER" />
+    <result column="n_User_Id" property="nUserId" jdbcType="INTEGER" />
+    <result column="n_Repairer_Id" property="nRepairerId" jdbcType="INTEGER" />
+    <result column="n_Equip_Id" property="nEquipId" jdbcType="INTEGER" />
+    <result column="n_Status" property="nStatus" jdbcType="INTEGER" />
+    <result column="vc_Type" property="vcType" jdbcType="VARCHAR" />
+    <result column="vc_Reason" property="vcReason" jdbcType="VARCHAR" />
+    <result column="dt_Reg" property="dtReg" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bibiboy.bean.order.RepairInfo" extends="BaseResultMap" >
+    <result column="vc_Content" property="vcContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    n_Id, n_User_Id, n_Repairer_Id, n_Equip_Id, n_Status, vc_Type, vc_Reason, dt_Reg
+  </sql>
+  <sql id="Blob_Column_List" >
+    vc_Content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bibiboy.bean.order.RepairInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from repair_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bibiboy.bean.order.RepairInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from repair_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from repair_info
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from repair_info
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bibiboy.bean.order.RepairInfoExample" >
+    delete from repair_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bibiboy.bean.order.RepairInfo" >
+    insert into repair_info (n_Id, n_User_Id, n_Repairer_Id, 
+      n_Equip_Id, n_Status, vc_Type, 
+      vc_Reason, dt_Reg, vc_Content
+      )
+    values (#{nId,jdbcType=INTEGER}, #{nUserId,jdbcType=INTEGER}, #{nRepairerId,jdbcType=INTEGER}, 
+      #{nEquipId,jdbcType=INTEGER}, #{nStatus,jdbcType=INTEGER}, #{vcType,jdbcType=VARCHAR}, 
+      #{vcReason,jdbcType=VARCHAR}, #{dtReg,jdbcType=TIMESTAMP}, #{vcContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bibiboy.bean.order.RepairInfo" >
+    insert into repair_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        n_Id,
+      </if>
+      <if test="nUserId != null" >
+        n_User_Id,
+      </if>
+      <if test="nRepairerId != null" >
+        n_Repairer_Id,
+      </if>
+      <if test="nEquipId != null" >
+        n_Equip_Id,
+      </if>
+      <if test="nStatus != null" >
+        n_Status,
+      </if>
+      <if test="vcType != null" >
+        vc_Type,
+      </if>
+      <if test="vcReason != null" >
+        vc_Reason,
+      </if>
+      <if test="dtReg != null" >
+        dt_Reg,
+      </if>
+      <if test="vcContent != null" >
+        vc_Content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        #{nId,jdbcType=INTEGER},
+      </if>
+      <if test="nUserId != null" >
+        #{nUserId,jdbcType=INTEGER},
+      </if>
+      <if test="nRepairerId != null" >
+        #{nRepairerId,jdbcType=INTEGER},
+      </if>
+      <if test="nEquipId != null" >
+        #{nEquipId,jdbcType=INTEGER},
+      </if>
+      <if test="nStatus != null" >
+        #{nStatus,jdbcType=INTEGER},
+      </if>
+      <if test="vcType != null" >
+        #{vcType,jdbcType=VARCHAR},
+      </if>
+      <if test="vcReason != null" >
+        #{vcReason,jdbcType=VARCHAR},
+      </if>
+      <if test="dtReg != null" >
+        #{dtReg,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcContent != null" >
+        #{vcContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bibiboy.bean.order.RepairInfoExample" resultType="java.lang.Integer" >
+    select count(*) from repair_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update repair_info
+    <set >
+      <if test="record.nId != null" >
+        n_Id = #{record.nId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nUserId != null" >
+        n_User_Id = #{record.nUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nRepairerId != null" >
+        n_Repairer_Id = #{record.nRepairerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nEquipId != null" >
+        n_Equip_Id = #{record.nEquipId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nStatus != null" >
+        n_Status = #{record.nStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.vcType != null" >
+        vc_Type = #{record.vcType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcReason != null" >
+        vc_Reason = #{record.vcReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtReg != null" >
+        dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcContent != null" >
+        vc_Content = #{record.vcContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update repair_info
+    set n_Id = #{record.nId,jdbcType=INTEGER},
+      n_User_Id = #{record.nUserId,jdbcType=INTEGER},
+      n_Repairer_Id = #{record.nRepairerId,jdbcType=INTEGER},
+      n_Equip_Id = #{record.nEquipId,jdbcType=INTEGER},
+      n_Status = #{record.nStatus,jdbcType=INTEGER},
+      vc_Type = #{record.vcType,jdbcType=VARCHAR},
+      vc_Reason = #{record.vcReason,jdbcType=VARCHAR},
+      dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP},
+      vc_Content = #{record.vcContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update repair_info
+    set n_Id = #{record.nId,jdbcType=INTEGER},
+      n_User_Id = #{record.nUserId,jdbcType=INTEGER},
+      n_Repairer_Id = #{record.nRepairerId,jdbcType=INTEGER},
+      n_Equip_Id = #{record.nEquipId,jdbcType=INTEGER},
+      n_Status = #{record.nStatus,jdbcType=INTEGER},
+      vc_Type = #{record.vcType,jdbcType=VARCHAR},
+      vc_Reason = #{record.vcReason,jdbcType=VARCHAR},
+      dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bibiboy.bean.order.RepairInfo" >
+    update repair_info
+    <set >
+      <if test="nUserId != null" >
+        n_User_Id = #{nUserId,jdbcType=INTEGER},
+      </if>
+      <if test="nRepairerId != null" >
+        n_Repairer_Id = #{nRepairerId,jdbcType=INTEGER},
+      </if>
+      <if test="nEquipId != null" >
+        n_Equip_Id = #{nEquipId,jdbcType=INTEGER},
+      </if>
+      <if test="nStatus != null" >
+        n_Status = #{nStatus,jdbcType=INTEGER},
+      </if>
+      <if test="vcType != null" >
+        vc_Type = #{vcType,jdbcType=VARCHAR},
+      </if>
+      <if test="vcReason != null" >
+        vc_Reason = #{vcReason,jdbcType=VARCHAR},
+      </if>
+      <if test="dtReg != null" >
+        dt_Reg = #{dtReg,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcContent != null" >
+        vc_Content = #{vcContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bibiboy.bean.order.RepairInfo" >
+    update repair_info
+    set n_User_Id = #{nUserId,jdbcType=INTEGER},
+      n_Repairer_Id = #{nRepairerId,jdbcType=INTEGER},
+      n_Equip_Id = #{nEquipId,jdbcType=INTEGER},
+      n_Status = #{nStatus,jdbcType=INTEGER},
+      vc_Type = #{vcType,jdbcType=VARCHAR},
+      vc_Reason = #{vcReason,jdbcType=VARCHAR},
+      dt_Reg = #{dtReg,jdbcType=TIMESTAMP},
+      vc_Content = #{vcContent,jdbcType=LONGVARCHAR}
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bibiboy.bean.order.RepairInfo" >
+    update repair_info
+    set n_User_Id = #{nUserId,jdbcType=INTEGER},
+      n_Repairer_Id = #{nRepairerId,jdbcType=INTEGER},
+      n_Equip_Id = #{nEquipId,jdbcType=INTEGER},
+      n_Status = #{nStatus,jdbcType=INTEGER},
+      vc_Type = #{vcType,jdbcType=VARCHAR},
+      vc_Reason = #{vcReason,jdbcType=VARCHAR},
+      dt_Reg = #{dtReg,jdbcType=TIMESTAMP}
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+</mapper>

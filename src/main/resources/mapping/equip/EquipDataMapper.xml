@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bibiboy.mapper.equip.EquipDataMapper" >
+  <resultMap id="BaseResultMap" type="com.bibiboy.bean.equip.EquipData" >
+    <id column="n_Id" property="nId" jdbcType="INTEGER" />
+    <result column="n_Show" property="nShow" jdbcType="INTEGER" />
+    <result column="vc_Code" property="vcCode" jdbcType="VARCHAR" />
+    <result column="vc_Data_Name" property="vcDataName" jdbcType="VARCHAR" />
+    <result column="vc_Data" property="vcData" jdbcType="VARCHAR" />
+    <result column="dt_Cre" property="dtCre" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="UserEquipGroup" type="com.bibiboy.bean.equip.UserEquipDataGroup" >
+   	<id column="n_Id" property="nId" jdbcType="INTEGER" />
+    <result column="n_UserId" property="nUserId" jdbcType="INTEGER" />
+    <result column="n_Equip_Detail_Id" property="nEquipDetailId" jdbcType="INTEGER" />
+    <result column="vc_Code" property="vcCode" jdbcType="VARCHAR" />
+    <result column="dt_Reg" property="dtReg" jdbcType="TIMESTAMP" />
+    <result column="vc_Pic" property="vcPic" jdbcType="VARCHAR" />
+    <collection property="equipDataList" ofType="com.bibiboy.bean.equip.EquipData">
+	    <id column="n_Id" property="nId" jdbcType="INTEGER" />
+	    <result column="vc_Data_Name" property="vcDataName" jdbcType="VARCHAR" />
+	    <result column="vc_Data" property="vcData" jdbcType="VARCHAR" />
+	    <result column="vc_Name" property="vcName" jdbcType="VARCHAR" />
+	    <result column="vc_Model" property="vcModel" jdbcType="VARCHAR" />
+	    <result column="vc_Item" property="vcItem" jdbcType="VARCHAR" />
+	    <result column="dt_Cre" property="dtCre" jdbcType="TIMESTAMP" />
+    </collection>
+  </resultMap>
+  <resultMap id="equipDataGroup" type="com.bibiboy.bean.equip.EquipDataGroup" >
+    <id column="n_Pid" property="nPid" jdbcType="INTEGER" />
+    <collection property="equipDataList" ofType="com.bibiboy.bean.equip.EquipData">
+	    <result column="vc_Data_Name" property="vcDataName" jdbcType="VARCHAR" />
+	    <result column="vc_Data" property="vcData" jdbcType="VARCHAR" />
+	    <result column="dt_Cre" property="dtCre" jdbcType="TIMESTAMP" />
+    </collection>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    n_Id, n_Show, vc_Code, vc_Data_Name, vc_Data, dt_Cre
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bibiboy.bean.equip.EquipDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from equip_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from equip_data
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from equip_data
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bibiboy.bean.equip.EquipDataExample" >
+    delete from equip_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bibiboy.bean.equip.EquipData" >
+    insert into equip_data (n_Id, n_Show, vc_Code, 
+      vc_Data_Name, vc_Data, dt_Cre
+      )
+    values (#{nId,jdbcType=INTEGER}, #{nShow,jdbcType=INTEGER}, #{vcCode,jdbcType=VARCHAR}, 
+      #{vcDataName,jdbcType=VARCHAR}, #{vcData,jdbcType=VARCHAR}, #{dtCre,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bibiboy.bean.equip.EquipData" >
+    insert into equip_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        n_Id,
+      </if>
+      <if test="nShow != null" >
+        n_Show,
+      </if>
+      <if test="vcCode != null" >
+        vc_Code,
+      </if>
+      <if test="vcDataName != null" >
+        vc_Data_Name,
+      </if>
+      <if test="vcData != null" >
+        vc_Data,
+      </if>
+      <if test="dtCre != null" >
+        dt_Cre,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        #{nId,jdbcType=INTEGER},
+      </if>
+      <if test="nShow != null" >
+        #{nShow,jdbcType=INTEGER},
+      </if>
+      <if test="vcCode != null" >
+        #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcDataName != null" >
+        #{vcDataName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcData != null" >
+        #{vcData,jdbcType=VARCHAR},
+      </if>
+      <if test="dtCre != null" >
+        #{dtCre,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bibiboy.bean.equip.EquipDataExample" resultType="java.lang.Integer" >
+    select count(*) from equip_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update equip_data
+    <set >
+      <if test="record.nId != null" >
+        n_Id = #{record.nId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nShow != null" >
+        n_Show = #{record.nShow,jdbcType=INTEGER},
+      </if>
+      <if test="record.vcCode != null" >
+        vc_Code = #{record.vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcDataName != null" >
+        vc_Data_Name = #{record.vcDataName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcData != null" >
+        vc_Data = #{record.vcData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtCre != null" >
+        dt_Cre = #{record.dtCre,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update equip_data
+    set n_Id = #{record.nId,jdbcType=INTEGER},
+      n_Show = #{record.nShow,jdbcType=INTEGER},
+      vc_Code = #{record.vcCode,jdbcType=VARCHAR},
+      vc_Data_Name = #{record.vcDataName,jdbcType=VARCHAR},
+      vc_Data = #{record.vcData,jdbcType=VARCHAR},
+      dt_Cre = #{record.dtCre,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bibiboy.bean.equip.EquipData" >
+    update equip_data
+    <set >
+      <if test="nShow != null" >
+        n_Show = #{nShow,jdbcType=INTEGER},
+      </if>
+      <if test="vcCode != null" >
+        vc_Code = #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcDataName != null" >
+        vc_Data_Name = #{vcDataName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcData != null" >
+        vc_Data = #{vcData,jdbcType=VARCHAR},
+      </if>
+      <if test="dtCre != null" >
+        dt_Cre = #{dtCre,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bibiboy.bean.equip.EquipData" >
+    update equip_data
+    set n_Show = #{nShow,jdbcType=INTEGER},
+      vc_Code = #{vcCode,jdbcType=VARCHAR},
+      vc_Data_Name = #{vcDataName,jdbcType=VARCHAR},
+      vc_Data = #{vcData,jdbcType=VARCHAR},
+      dt_Cre = #{dtCre,jdbcType=TIMESTAMP}
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <select id="getUserSelfEuqipData" parameterType="Integer" resultMap="UserEquipGroup"> 
+  	select ue.vc_Code,ue.dt_Reg,ed.vc_Data_Name,ed.vc_Data,ed.n_Id,ed.n_Show,edl.vc_Name,edl.vc_Model,edl.vc_Item,edl.vc_pic,ed.dt_Cre
+	from user_equip ue
+	LEFT JOIN equip_data ed on ed.n_Pid=ue.n_Id
+	LEFT JOIN equip_detail edl on ue.n_Equip_Detail_Id=edl.n_Id
+	where ue.n_User_Id=#{nUserId}
+  </select>
+  	
+  <select id="getUserSlowEquipDataList" parameterType="Integer" resultMap="equipDataGroup">
+  	<foreach collection="list" item="item" index="index" 
+	        separator="UNION ALL" open="" close="">
+	       (select ed.n_Pid,ed.vc_Data,ed.vc_Data_Name,ed.dt_Cre from equip_data ed where ed.n_Show=0 and ed.n_Pid=#{item} ORDER BY ed.dt_Cre DESC LIMIT 0,5)
+	</foreach>
+  </select>
+  	
+  <select id="getUserFastEquipDataList" parameterType="Integer" resultMap="equipDataGroup">
+  	<foreach collection="list" item="item" index="index" 
+	        separator="UNION ALL" open="" close="">
+	       (select ed.n_Pid,ed.vc_Data,ed.vc_Data_Name,ed.dt_Cre from equip_data ed where ed.n_Show=1 and ed.n_Pid=#{item} ORDER BY ed.dt_Cre DESC LIMIT 0,28)
+	</foreach>
+  </select>
+  	
+  <select id="getUserEquipDataTypeList" parameterType="Integer" resultType="com.bibiboy.bean.equip.EquipDataType">
+  	select DISTINCT edt.* from equip_detail ed LEFT JOIN equip_data_type edt on edt.n_Type=ed.n_Type where ed.n_Id IN
+  	<foreach collection="list" item="item" index="index" 
+	        separator="," open="(" close=")">
+	       #{item}
+	</foreach>
+  </select>
+  	
+</mapper>

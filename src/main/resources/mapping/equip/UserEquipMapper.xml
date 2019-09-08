@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bibiboy.mapper.equip.UserEquipMapper" >
+  <resultMap id="BaseResultMap" type="com.bibiboy.bean.equip.UserEquip" >
+    <id column="n_Id" property="nId" jdbcType="INTEGER" />
+    <result column="n_User_Id" property="nUserId" jdbcType="INTEGER" />
+    <result column="n_Equip_Detail_Id" property="nEquipDetailId" jdbcType="INTEGER" />
+    <result column="n_Status" property="nStatus" jdbcType="INTEGER" />
+    <result column="vc_Code" property="vcCode" jdbcType="VARCHAR" />
+    <result column="dt_Reg" property="dtReg" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="userDataType" type="com.bibiboy.bean.equip.EquipDataTypeGroup" >
+    <id column="n_Type" property="nType" jdbcType="INTEGER" />
+    <collection property="equipDataTypeList" ofType="com.bibiboy.bean.equip.EquipDataType">
+	    <id column="n_Id" property="nId" jdbcType="INTEGER" />
+	    <result column="vc_Unit" property="vcUnit" jdbcType="VARCHAR" />
+	    <result column="vc_Data_Name" property="vcDataName" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    n_Id, n_User_Id, n_Equip_Detail_Id, n_Status, vc_Code, dt_Reg
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bibiboy.bean.equip.UserEquipExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_equip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_equip
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_equip
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bibiboy.bean.equip.UserEquipExample" >
+    delete from user_equip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bibiboy.bean.equip.UserEquip" >
+    insert into user_equip (n_Id, n_User_Id, n_Equip_Detail_Id, 
+      n_Status, vc_Code, dt_Reg
+      )
+    values (#{nId,jdbcType=INTEGER}, #{nUserId,jdbcType=INTEGER}, #{nEquipDetailId,jdbcType=INTEGER}, 
+      #{nStatus,jdbcType=INTEGER}, #{vcCode,jdbcType=VARCHAR}, #{dtReg,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bibiboy.bean.equip.UserEquip" >
+    insert into user_equip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        n_Id,
+      </if>
+      <if test="nUserId != null" >
+        n_User_Id,
+      </if>
+      <if test="nEquipDetailId != null" >
+        n_Equip_Detail_Id,
+      </if>
+      <if test="nStatus != null" >
+        n_Status,
+      </if>
+      <if test="vcCode != null" >
+        vc_Code,
+      </if>
+      <if test="dtReg != null" >
+        dt_Reg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        #{nId,jdbcType=INTEGER},
+      </if>
+      <if test="nUserId != null" >
+        #{nUserId,jdbcType=INTEGER},
+      </if>
+      <if test="nEquipDetailId != null" >
+        #{nEquipDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="nStatus != null" >
+        #{nStatus,jdbcType=INTEGER},
+      </if>
+      <if test="vcCode != null" >
+        #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dtReg != null" >
+        #{dtReg,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bibiboy.bean.equip.UserEquipExample" resultType="java.lang.Integer" >
+    select count(*) from user_equip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_equip
+    <set >
+      <if test="record.nId != null" >
+        n_Id = #{record.nId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nUserId != null" >
+        n_User_Id = #{record.nUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nEquipDetailId != null" >
+        n_Equip_Detail_Id = #{record.nEquipDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nStatus != null" >
+        n_Status = #{record.nStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.vcCode != null" >
+        vc_Code = #{record.vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtReg != null" >
+        dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_equip
+    set n_Id = #{record.nId,jdbcType=INTEGER},
+      n_User_Id = #{record.nUserId,jdbcType=INTEGER},
+      n_Equip_Detail_Id = #{record.nEquipDetailId,jdbcType=INTEGER},
+      n_Status = #{record.nStatus,jdbcType=INTEGER},
+      vc_Code = #{record.vcCode,jdbcType=VARCHAR},
+      dt_Reg = #{record.dtReg,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bibiboy.bean.equip.UserEquip" >
+    update user_equip
+    <set >
+      <if test="nUserId != null" >
+        n_User_Id = #{nUserId,jdbcType=INTEGER},
+      </if>
+      <if test="nEquipDetailId != null" >
+        n_Equip_Detail_Id = #{nEquipDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="nStatus != null" >
+        n_Status = #{nStatus,jdbcType=INTEGER},
+      </if>
+      <if test="vcCode != null" >
+        vc_Code = #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dtReg != null" >
+        dt_Reg = #{dtReg,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bibiboy.bean.equip.UserEquip" >
+    update user_equip
+    set n_User_Id = #{nUserId,jdbcType=INTEGER},
+      n_Equip_Detail_Id = #{nEquipDetailId,jdbcType=INTEGER},
+      n_Status = #{nStatus,jdbcType=INTEGER},
+      vc_Code = #{vcCode,jdbcType=VARCHAR},
+      dt_Reg = #{dtReg,jdbcType=TIMESTAMP}
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <select id="getUserEquipDataTypeList" parameterType="Integer" resultMap="userDataType">
+  	select edt.* 
+  	from user_equip ue 
+  	LEFT JOIN equip_detail ed on ue.n_Equip_Detail_Id=ed.n_Id
+  	LEFT JOIN equip_data_type edt on edt.n_Type=ed.n_Type 
+  	where ue.n_User_Id=#{nId}
+  </select>
+  
+</mapper>

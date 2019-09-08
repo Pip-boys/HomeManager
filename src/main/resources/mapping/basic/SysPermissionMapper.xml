@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bibiboy.mapper.basic.SysPermissionMapper">
+	<resultMap id="BaseResultMap" type="com.bibiboy.bean.basic.SysPermission">
+		<id column="n_Id" property="nId" jdbcType="INTEGER" />
+		<result column="vc_Url" property="vcUrl" jdbcType="VARCHAR" />
+		<result column="n_role_id" property="nRoleId" jdbcType="INTEGER" />
+		<result column="vc_permission" property="vcPermission"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		n_Id, vc_Url, n_role_id, vc_permission
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.bibiboy.bean.basic.SysPermissionExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from sys_permission
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission
+		where n_Id = #{nId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sys_permission
+		where n_Id = #{nId,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.bibiboy.bean.basic.SysPermissionExample">
+		delete from sys_permission
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.bibiboy.bean.basic.SysPermission">
+		insert into sys_permission (n_Id, vc_Url, n_role_id,
+		vc_permission)
+		values (#{nId,jdbcType=INTEGER}, #{vcUrl,jdbcType=VARCHAR},
+		#{nRoleId,jdbcType=INTEGER},
+		#{vcPermission,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.bibiboy.bean.basic.SysPermission">
+		insert into sys_permission
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="nId != null">
+				n_Id,
+			</if>
+			<if test="vcUrl != null">
+				vc_Url,
+			</if>
+			<if test="nRoleId != null">
+				n_role_id,
+			</if>
+			<if test="vcPermission != null">
+				vc_permission,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="nId != null">
+				#{nId,jdbcType=INTEGER},
+			</if>
+			<if test="vcUrl != null">
+				#{vcUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="nRoleId != null">
+				#{nRoleId,jdbcType=INTEGER},
+			</if>
+			<if test="vcPermission != null">
+				#{vcPermission,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.bibiboy.bean.basic.SysPermissionExample"
+		resultType="java.lang.Integer">
+		select count(*) from sys_permission
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update sys_permission
+		<set>
+			<if test="record.nId != null">
+				n_Id = #{record.nId,jdbcType=INTEGER},
+			</if>
+			<if test="record.vcUrl != null">
+				vc_Url = #{record.vcUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.nRoleId != null">
+				n_role_id = #{record.nRoleId,jdbcType=INTEGER},
+			</if>
+			<if test="record.vcPermission != null">
+				vc_permission = #{record.vcPermission,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update sys_permission
+		set n_Id = #{record.nId,jdbcType=INTEGER},
+		vc_Url = #{record.vcUrl,jdbcType=VARCHAR},
+		n_role_id = #{record.nRoleId,jdbcType=INTEGER},
+		vc_permission = #{record.vcPermission,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.bibiboy.bean.basic.SysPermission">
+		update sys_permission
+		<set>
+			<if test="vcUrl != null">
+				vc_Url = #{vcUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="nRoleId != null">
+				n_role_id = #{nRoleId,jdbcType=INTEGER},
+			</if>
+			<if test="vcPermission != null">
+				vc_permission = #{vcPermission,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where n_Id = #{nId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.bibiboy.bean.basic.SysPermission">
+		update sys_permission
+		set vc_Url = #{vcUrl,jdbcType=VARCHAR},
+		n_role_id = #{nRoleId,jdbcType=INTEGER},
+		vc_permission = #{vcPermission,jdbcType=VARCHAR}
+		where n_Id = #{nId,jdbcType=INTEGER}
+	</update>
+
+	<insert id="insertSysPermissionBatch" parameterType="java.util.Map">
+		insert into sys_permission(vc_Url,vc_Permission,n_Role_Id)
+		VALUES
+		<foreach collection="permissionList" item="item" separator=",">
+			(#{item.vcUrl},#{item.vcPermission},#{nRoleId})
+		</foreach>
+	</insert>
+
+</mapper>

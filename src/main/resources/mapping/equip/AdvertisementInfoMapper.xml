@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bibiboy.mapper.equip.AdvertisementInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bibiboy.bean.equip.AdvertisementInfo" >
+    <id column="n_Id" property="nId" jdbcType="INTEGER" />
+    <result column="n_Top" property="nTop" jdbcType="INTEGER" />
+    <result column="n_Sort" property="nSort" jdbcType="INTEGER" />
+    <result column="n_Equip" property="nEquip" jdbcType="INTEGER" />
+    <result column="vc_Pic" property="vcPic" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    n_Id, n_Top, n_Sort, n_Equip, vc_Pic
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bibiboy.bean.equip.AdvertisementInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from advertisement_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from advertisement_info
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from advertisement_info
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bibiboy.bean.equip.AdvertisementInfoExample" >
+    delete from advertisement_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bibiboy.bean.equip.AdvertisementInfo" >
+    insert into advertisement_info (n_Id, n_Top, n_Sort, 
+      n_Equip, vc_Pic)
+    values (#{nId,jdbcType=INTEGER}, #{nTop,jdbcType=INTEGER}, #{nSort,jdbcType=INTEGER}, 
+      #{nEquip,jdbcType=INTEGER}, #{vcPic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bibiboy.bean.equip.AdvertisementInfo" >
+    insert into advertisement_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        n_Id,
+      </if>
+      <if test="nTop != null" >
+        n_Top,
+      </if>
+      <if test="nSort != null" >
+        n_Sort,
+      </if>
+      <if test="nEquip != null" >
+        n_Equip,
+      </if>
+      <if test="vcPic != null" >
+        vc_Pic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        #{nId,jdbcType=INTEGER},
+      </if>
+      <if test="nTop != null" >
+        #{nTop,jdbcType=INTEGER},
+      </if>
+      <if test="nSort != null" >
+        #{nSort,jdbcType=INTEGER},
+      </if>
+      <if test="nEquip != null" >
+        #{nEquip,jdbcType=INTEGER},
+      </if>
+      <if test="vcPic != null" >
+        #{vcPic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bibiboy.bean.equip.AdvertisementInfoExample" resultType="java.lang.Integer" >
+    select count(*) from advertisement_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update advertisement_info
+    <set >
+      <if test="record.nId != null" >
+        n_Id = #{record.nId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nTop != null" >
+        n_Top = #{record.nTop,jdbcType=INTEGER},
+      </if>
+      <if test="record.nSort != null" >
+        n_Sort = #{record.nSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.nEquip != null" >
+        n_Equip = #{record.nEquip,jdbcType=INTEGER},
+      </if>
+      <if test="record.vcPic != null" >
+        vc_Pic = #{record.vcPic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update advertisement_info
+    set n_Id = #{record.nId,jdbcType=INTEGER},
+      n_Top = #{record.nTop,jdbcType=INTEGER},
+      n_Sort = #{record.nSort,jdbcType=INTEGER},
+      n_Equip = #{record.nEquip,jdbcType=INTEGER},
+      vc_Pic = #{record.vcPic,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bibiboy.bean.equip.AdvertisementInfo" >
+    update advertisement_info
+    <set >
+      <if test="nTop != null" >
+        n_Top = #{nTop,jdbcType=INTEGER},
+      </if>
+      <if test="nSort != null" >
+        n_Sort = #{nSort,jdbcType=INTEGER},
+      </if>
+      <if test="nEquip != null" >
+        n_Equip = #{nEquip,jdbcType=INTEGER},
+      </if>
+      <if test="vcPic != null" >
+        vc_Pic = #{vcPic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bibiboy.bean.equip.AdvertisementInfo" >
+    update advertisement_info
+    set n_Top = #{nTop,jdbcType=INTEGER},
+      n_Sort = #{nSort,jdbcType=INTEGER},
+      n_Equip = #{nEquip,jdbcType=INTEGER},
+      vc_Pic = #{vcPic,jdbcType=VARCHAR}
+    where n_Id = #{nId,jdbcType=INTEGER}
+  </update>
+</mapper>

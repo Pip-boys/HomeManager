@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ZH-CN">
+<head>
+  <meta charset="utf-8">
+  <title>web RTC 测试</title>
+  <style>
+    .booth {
+      
+    }
+  </style>
+  <script type="text/javascript" src="../../js/qrcode/qrcode.js"></script>
+  <script type="text/javascript" src="../../js/amazeUI/assets/js/jquery.min.js"></script>
+</head>
+<body>
+  <div style="width:400px;background:#ccc;border: 10px solid #ddd;margin: 0 auto;">
+    <video id="video" width="400" height="300"></video>
+    <button id='tack'> snap shot</button>
+    <canvas id='canvas' width='400' height='300' style="display: none;"></canvas>
+    <img id='img' src=''>
+  </div>
+ 
+ 
+  <script>
+    var video = document.getElementById('video'),
+        canvas = document.getElementById('canvas'),
+        snap = document.getElementById('tack'),
+        img = document.getElementById('img'),
+        vendorUrl = window.URL || window.webkitURL;
+    var imgData;
+    //媒体对象
+    navigator.getMedia = navigator.getUserMedia ||
+                         navagator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia ||
+                         navigator.msGetUserMedia;
+    navigator.getMedia({
+        video: true, //使用摄像头对象
+        audio: false  //不适用音频
+    }, function(strem){
+        console.log(strem);
+        video.src = vendorUrl.createObjectURL(strem);
+        video.play();
+    }, function(error) {
+        //error.code
+        console.log(error);
+    });
+    snap.addEventListener('click', function(){
+        //绘制canvas图形
+        canvas.getContext('2d').drawImage(video, 0, 0, 400, 300);
+        
+        //把canvas图像转为img图片
+        img.src = canvas.toDataURL("image/png");
+        imgData = canvas.toDataURL();
+        uploadImage();
+        
+    })
+    
+    function uploadImage(){
+    //上传到后台。
+    var uploadAjax = $.ajax({
+        type: "post",
+        //后端需要调用的地址
+        url:"/file/qrcode",
+        data: JSON.stringify({"imgData": imgData}),
+		contentType:"json/application",
+		//设置超时
+        timeout:10000,
+        async: true,
+        success: function (htmlVal) {
+        	//成功后回调
+		},
+        error: function(data) {
+        },
+        //调用执行后调用的函数
+        complete: function (XMLHttpRequest, textStatus) {
+            if(textStatus == 'timeout'){
+                uploadAjax.abort(); //取消请求
+                //超时提示：请求超时，请重试
+                alert("请求超时，请重试")
+                //请求超时返回首页
+                closeCard();
+            }
+        }
+    });
+}
+
+  </script>
+</body>
+</html>

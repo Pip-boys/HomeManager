@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!-- saved from url=(0024)https://weui.io/weui.js/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<title>weui.js</title>
+<link rel="stylesheet" href="weui.min.css">
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="weui.min.js"></script>
+<style>
+body, html {
+	height: 100%;
+	background-color: #f8f8f8
+}
+
+body {
+	font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif
+}
+
+.item {
+	padding: 10px 0
+}
+
+.item__title {
+	margin-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	color: #999;
+	font-weight: 400;
+	font-size: 14px
+}
+
+.item__ctn {
+	padding: 0 15px
+}
+
+.page_feedback {
+	padding: 15px;
+	overflow: auto;
+	background-color: #FFF
+}
+
+label>* {
+	pointer-events: none
+}
+
+.weui-picker__item {
+	padding: 0;
+	height: 34px;
+	line-height: 34px
+}
+</style>
+<style></style>
+<style type="text/css"></style>
+</head>
+<body ontouchstart="">
+
+	<div style="height: 200px;"></div>
+	<div class="weui-cells weui-cells_form">
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">省-市-县</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" id="first" placeholder="请选择" readonly="readonly"/>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">乡-镇</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" id="second" placeholder="请选择" readonly="readonly"/>
+			</div>
+		</div>
+	</div>
+
+	<div class="weui-cell weui-cell_select">
+		<div class="weui-cell__bd" >
+			<select class="weui-select" name="select1" disabled="disabled">
+				<option selected="" value="1">微信号</option>
+				<option value="2">QQ号</option>
+				<option value="3">Email</option>
+			</select>
+		</div>
+	</div>
+
+
+	<!-- <div class="weui-tab__panel">
+		<div class="weui-tab__content page_feedback" style="display: block;">
+			<a href="javascript:;" id="first" class="weui-btn weui-btn_default">省市区</a>
+			<a href="javascript:;" id="second" class="weui-btn weui-btn_default">省市区</a>
+		</div>
+	</div> -->
+
+
+	<!-- <script type="text/javascript" src="example.js"></script> -->
+	<script type="text/javascript">
+		$(function() {
+			//省市区的默认选中项
+			var firstData = [ '110000000000', '110100000000', '110101000000' ];
+			//乡村的默认选中项
+			var secondData = [ '130105001000', '130105001002' ];
+			
+			var firstOldData;
+			
+			//乡村默认数据
+			var obj = new Object();
+			obj = [ {
+					'label' : '革新街街道办事处',
+					'value' : '130105001000',
+					'children' : [ {
+						'label' : '市委西院',
+						'value' : '130105001002'
+					}, {
+						'label' : '革新街',
+						'value' : '130105001015'
+					} ]
+				}, {
+					'label' : '新华路街道办事处',
+					'value' : '130105003000',
+					'children' : [ {
+						'label' : '北后',
+						'value' : '130105003005'
+					}, {
+						'label' : '宁安小区',
+						'value' : '130105003007'
+					}, ]
+				} ];
+
+			$("#first").click(function() {
+				weui.picker([ {
+					label : '北京市',
+					value : '110000000000',
+					children : [ {
+						label : '市辖区',
+						value : '110100000000',
+						children : [ {
+							label : '东城区',
+							value : '110101000000'
+						}, {
+							label : '西城区',
+							value : '110102000000'
+						} ]
+					} ]
+				}, {
+					label : '河北省',
+					value : '130000000000',
+					children : [ {
+						label : '石家庄市',
+						value : '130100000000',
+						children : [ {
+							label : '长安区',
+							value : '130102000000'
+						}, {
+							label : '新华区',
+							value : '130105000000'
+						} ]
+					}, {
+						label : '唐山市',
+						value : '130200000000',
+						children : [ {
+							label : '路北区',
+							value : '130203000000'
+						}, {
+							label : '路南区',
+							value : '130202000000'
+						} ]
+					} ]
+				} ], {
+					depth : 3,
+					defaultValue : firstData,
+					onChange : function onChange(result) {
+						firstData = result;
+						//根据三个值中的第三个值来请求后台获取到这个区下面的乡镇
+						var temp = result[2];
+						//ajax用temp的值去查
+
+						if (temp == '130102000000') {
+							//假设选的是石家庄市新华区，下面是返回的结果
+							obj = [ {
+								'label' : '革新街街道办事处',
+								'value' : '130105001000',
+								'children' : [ {
+									'label' : '市委西院',
+									'value' : '130105001002'
+								}, {
+									'label' : '革新街',
+									'value' : '130105001015'
+								} ]
+							}, {
+								'label' : '新华路街道办事处',
+								'value' : '130105003000',
+								'children' : [ {
+									'label' : '北后',
+									'value' : '130105003005'
+								}, {
+									'label' : '宁安小区',
+									'value' : '130105003007'
+								}, ]
+							} ];
+						} else if (temp = '130102000000') {
+							//假设选的是石家庄市长安区
+							obj = [ {
+								'label' : '建北街道办事处',
+								'value' : '130105001000',
+								'children' : [ {
+									'label' : '棉一社区居民委员会',
+									'value' : '130102001001'
+								}, {
+									'label' : '光华路社区居民委员会',
+									'value' : '130102001002'
+								} ]
+							}, {
+								'label' : '青园街道办事处',
+								'value' : '130105003000',
+								'children' : [ {
+									'label' : '广电社区居民委员会',
+									'value' : '130102002010'
+								}, {
+									'label' : '东安社区居民委员会',
+									'value' : '130102002019'
+								}, ]
+							} ];
+						}
+						console.log(result);
+					},
+					onConfirm : function onConfirm(result) {
+						var str="";
+						for(var i in result){
+							if(i<2){
+								str+=result[i].label+"-";
+							}else{
+								str+=result[i].label;
+							}
+							
+						}
+						
+						if(firstOldData!=str&&firstOldData!=null){
+							$("#second").val('');
+						}
+						firstOldData=str;
+						$("#first").val(str);
+						
+					},
+					id : 'first'
+				});
+			});
+
+			$("#second").click(function() {
+				weui.picker(obj, {
+					depth : 2,
+					defaultValue : secondData,
+					onChange : function onChange(result) {
+						secondData = result;
+						console.log(result);
+					},
+					onConfirm : function onConfirm(result) {
+						var str="";
+						for(var i in result){
+							if(i<1){
+								str+=result[i].label+"-";
+							}else{
+								str+=result[i].label;
+							}
+							
+						}
+						$("#second").val(str);
+					},
+					id : 'second'
+				});
+			});
+		});
+	</script>
+
+</body>
+</html>
